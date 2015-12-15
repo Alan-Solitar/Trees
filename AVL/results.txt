@@ -1,0 +1,9 @@
+Results:
+
+a). Input.txt with BSTSearch
+
+b). Input.txt with AVLSearch
+
+c). Output.txt with BSTSearch
+
+d). Output.txt with AVLSearch

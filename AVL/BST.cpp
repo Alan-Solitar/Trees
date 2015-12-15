@@ -1,13 +1,10 @@
-#include "AVLSearch.h"
+#include "BST.h"
 #include <iostream>
-#include <string>
-// note to self: left off at line 83
-
-int AVLSearch::getHeight()
+int BST::getHeight()
 {
 	getHeightInternal(root);
 }
-int AVLSearch::getHeightInternal(node* root)
+int BST::getHeightInternal(node* root)
 {
 	int lHeight = getHeightInternal(root->leftchild);
 	int rHeight = getHeightInternal(root->rightchild);
@@ -18,13 +15,13 @@ int AVLSearch::getHeightInternal(node* root)
 	
 }
 
-void AVLSearch::insert(int key, std::string value)
+void BST::insert(int key, std::string value)
 {
 	node *new_node = new node(key,value);
 	insertInternal(root,new_node);
 }
 
-void AVLSearch::insertInternal(node *&root, node *new_node)
+void BST::insertInternal(node *&root, node *new_node)
 {
 	if(root==NULL)
 		root= new_node;
@@ -41,12 +38,12 @@ void AVLSearch::insertInternal(node *&root, node *new_node)
 
 
 
-bool AVLSearch::Delete(int key)
+bool BST::Delete(int key)
 {
 	bool deleted = deleteInternal(root, key);
 }
 
-bool AVLSearch::deleteInternal(node *& root, int key)
+bool BST::deleteInternal(node *& root, int key)
 {
 	if(root==NULL)
 		return false;
@@ -87,7 +84,7 @@ bool AVLSearch::deleteInternal(node *& root, int key)
 	return true;
 }
 
-node* AVLSearch::popMinNode(node *&root)
+node* BST::popMinNode(node *&root)
 {
 	if(root->leftchild==NULL)
 	{
@@ -101,12 +98,12 @@ node* AVLSearch::popMinNode(node *&root)
 	}
 }
 
-std::string AVLSearch::search(int key)
+std::string BST::search(int key)
 {
 	return searchInternal(root,key);
 }
 
-std::string AVLSearch::searchInternal(node * root, int key)
+std::string BST::searchInternal(node * root, int key)
 {
 	if(root==NULL)
 	{
@@ -125,52 +122,3 @@ std::string AVLSearch::searchInternal(node * root, int key)
 		searchInternal(root->rightchild,key);
 	}
 }
-int AVLSearch::getBalanceFactor(node *root)
-{
-	int lheight = getHeightInternal(root->leftchild);
-	int rheight =getHeightInternal(root->rightchild);
-	return (lheight - rheight);
-}
-node * AVLSearch::balance(node *root)
-{
-	int balanceFactor = getBalanceFactor(root);
-	if((balanceFactor > 1) && (getBalanceFactor(root->leftchild)>=0))
-		return rotateRight(root);	
-	if((balanceFactor > 1) &&(getBalanceFactor(root->leftchild)<0))
-		return rotateRightLeft(root);
-	if((balanceFactor < -1) && (getBalanceFactor(root->rightchild)<=0))
-		return rotateLeft(root);
-	if((balanceFactor < -1) && (getBalanceFactor(root->rightchild )>0))
-		return rotateLeftRight(root);
-}
-node * AVLSearch::rotateLeft(node *root)
-{
-	node * temp = root->rightchild;
-	root->rightchild= temp->leftchild;
-	temp->leftchild = root;
-	return temp;
-}
-node * AVLSearch::rotateRight(node *root)
-{
-	node *temp = root->rightchild;
-	root->leftchild = temp->rightchild;
-	temp->rightchild=root;
-	return temp;;
-
-}
-node * AVLSearch::rotateLeftRight(node *root)
-{
-	node * temp = rotateLeft(root);
-	temp = rotateRight(temp);
-	return temp;
-}
-node * AVLSearch::rotateRightLeft(node *root)
-{
-	node * temp = rotateRight(root);
-	temp = rotateLeft(temp);
-	return temp;
-}
-
-
-
-

@@ -21,11 +21,11 @@ int node::setValue(std::string v)
 	value=v;
 }
 
-int getKey()
+int node:: getKey()
 {
 	return key;
 }
-std::string getValue()
+std::string node:: getValue()
 {
 	return value;
 }

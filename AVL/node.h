@@ -9,16 +9,15 @@ public:
 	std::string value;
 	node* leftchild;
 	node* rightchild;
-	int height;
 //member functions
 	node();
-	node(int key,std::string value);
+	node(int k,std::string v);
 	int setKey(int k);
 	int setValue(std::string v);
 	int getKey();
 	std::string getValue();
 	
 
-}
+};
 
 #endif
